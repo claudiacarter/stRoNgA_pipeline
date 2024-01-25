@@ -10,6 +10,7 @@ import pathlib
 import time
 
 from Bio import SeqIO
+from Bio.SeqRecord import SeqRecord
 
 start_time = time.time()
 
@@ -41,7 +42,16 @@ print("Sequence lengths range from: ",min_seq," to ",max_seq)
 
 # Write back to fasta/fastq, maybe include Abundance Ranking in here to return results in RPM order?
 #will have to write new identifier lines as there would be multiple from original fastqs?
-# f"srna_target_candidate {}
+
+fasta_records = []
+for i in enumerate(consistent_seqs):
+    new_record = SeqRecord(i[1], id=f"srna_target_candidate_{i[0]}")
+    fasta_records.append(new_record)
+print(fasta_records)
+
+
+SeqIO.write(fasta_records, 'output.fq','fasta')
+
 
 #report run time (for dev only)
 end_time = time.time()
