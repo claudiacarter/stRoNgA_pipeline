@@ -6,6 +6,7 @@
 # sample through finding the intersection of sets of sRNAs created from each sample's fastq. Further refinement
 # could include non-exact matches, especially those with an exact match but within a longer sequence - if necessary.
 
+
 import pathlib
 import time
 
@@ -24,7 +25,7 @@ total_seqs = []
 for sample_file in sample_file_names:
     seqs = []
     for record in SeqIO.parse(sample_file, "fastq"):
-        seqs.append(record.seq)
+        seqs.append(str(record.seq))
     total_seqs.append(set(seqs))
 # print(total_seqs)
 
@@ -34,16 +35,25 @@ consistent_seqs = total_seqs[0].intersection(*total_seqs)
 min_seq = len(min(consistent_seqs))
 max_seq = len(max(consistent_seqs))
 
-print("Number of common sequences across all", quant_input,"input files: ",len(consistent_seqs))
-print("Sequence lengths range from: ",min_seq," to ",max_seq)
-#print(consistent_seqs)
+print("Number of common sequences across all", quant_input, "input files: ", len(consistent_seqs))
+print("Sequence lengths range from: ", min_seq, " to ", max_seq)
+# print(consistent_seqs)
 
+# how to include abundance ranking?
+# use sequence as a search term to retrieve RPM numbers from each sample input
+# assign each the average of the numbers retrieved
+# order by RPM highest to lowest
 
-# Write back to fasta/fastq, maybe include Abundance Ranking in here to return results in RPM order?
-#will have to write new identifier lines as there would be multiple from original fastqs?
+# could write to a csv containing (per line) seq and average RPM, then RPMs and identifiers from each sample source or
+# Write back to fasta
+# will have to write new identifier lines as there would be multiple from original fastqs?
 # f"srna_target_candidate {}
 
-#report run time (for dev only)
+with open("output.fa", 'w') as output:
+    for seq in enumerate(consistent_seqs):
+        output.write(">" + f"srna_target_candidate_{seq[0]+1}" + "\n" + seq[1] + "\n")
+
+# report run time (for dev only)
 end_time = time.time()
 
 print("Time taken: ", end_time - start_time, "seconds")
