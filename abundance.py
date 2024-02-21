@@ -34,12 +34,21 @@ average_abundances = [np.average(results_df.iloc[index, :]) for index in range(l
 std_devs = [np.std(results_df.iloc[index, :]) for index in range(len(sequences))]
 
 #make full df
-results_df.insert(0,"Sequence",sequences)
-results_df.insert(1,"Length (nt)", lengths)
+results_df.insert(0,"Definition Lines", definitions)
+results_df.insert(1,"Sequence",sequences)
+results_df.insert(2,"Length (nt)", lengths)
 results_df["Average Abundance"] = average_abundances
 results_df["Standard Deviation"] = std_devs
 
 results_df = results_df.sort_values(by=["Average Abundance"], ascending=False)
 
-#write df to new csv file
+# write df to new csv file
 results_df.to_csv('results.csv')
+
+# write sequences in abundance descending order to a new fasta
+ordered_deflines = results_df["Definition Lines"].tolist()
+ordered_sequences = results_df["Sequence"].tolist()
+
+with open("results.fa", 'w') as output:
+    for index, sequence in enumerate(ordered_sequences):
+        output.write(f"{ordered_deflines[index]}" + "\n" + f"{ordered_sequences[index]}" + "\n")
