@@ -1,5 +1,17 @@
 with open(r"C:\Users\clauc\PycharmProjects\pythonProject\results.fa", "r") as fasta:
     total_fasta = fasta.readlines()
+
+    #check if file is a fasta
+    isfasta = False
+    deflines = total_fasta[::2]
+
+    if all(">" in item for item in deflines):
+        isfasta = True
+
+    if isfasta == False:
+        print("ERROR: Input file does not seem to be a FASTA.")
+        exit()
+
     lines_per_file = 50
     new_file_num = 0
     current_file = []
@@ -18,4 +30,4 @@ with open(r"C:\Users\clauc\PycharmProjects\pythonProject\results.fa", "r") as fa
         current_file = []
         count = 0
 
-print(f"Split input FASTA to create {new_file_num + 1} FASTA files each containing {lines_per_file/2} sequences.")
+print(f"Split input FASTA to create {new_file_num} FASTAs, each contain {int(lines_per_file/2)} sequences or less.")
