@@ -12,7 +12,11 @@ with open(r"C:\Users\clauc\PycharmProjects\pythonProject\results.fa", "r") as fa
         print("ERROR: Input file does not seem to be a FASTA.")
         exit()
 
-    lines_per_file = 50
+    #set how many sequences you want per file, lines will be double this in FASTA format
+    seqs_per_file = 25
+    lines_per_file = 2*seqs_per_file
+
+    #working lists/
     new_file_num = 0
     current_file = []
     count = 0
@@ -30,4 +34,4 @@ with open(r"C:\Users\clauc\PycharmProjects\pythonProject\results.fa", "r") as fa
         current_file = []
         count = 0
 
-print(f"Split input FASTA to create {new_file_num} FASTAs, each contain {int(lines_per_file/2)} sequences or less.")
+print(f"Split input FASTA to create {new_file_num} FASTAs, each contain {seqs_per_file} sequences or less.")
