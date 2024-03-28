@@ -37,7 +37,7 @@ print("Number of common sequences across all", quant_input, "input files: ", len
 print("Sequence lengths range from: ", min_seq, " to ", max_seq)
 
 # Write back to fasta
-with open("output.fa", 'w') as output:
+with open("consistency_output.fa", 'w') as output:
     for seq in enumerate(consistent_seqs):
         output.write(">" + f"srna_target_candidate_{seq[0]+1}" + "\n" + seq[1] + "\n")
 
