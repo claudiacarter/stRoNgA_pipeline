@@ -12,9 +12,9 @@ RPM = (Sequence Frequency/Total Sequences)*10^6
 
 The scripts are designed to filter the large number of small RNAs to a smaller number that are worth exploring more in-depth, e.g. for specificity.
 
-Filtering Steps:
-1 - Remove sequences common to both host and parasite from each sample
-2 - Remove sequences that don't appear in every sample (applies to parasite-aligned fqs only)
-3 - Rank the remaining sequences by average abundance across the samples
+Filtering Steps:\
+1 - Remove sequences common to both host and parasite from each sample\
+2 - Remove sequences that don't appear in every sample (applies to parasite-aligned fqs only)\
+3 - Rank the remaining sequences by average abundance across the samples\
 
 The user can establish their own cut-off for abundance and proceed to analyse the top candidates further, e.g. by BLAST to check specificity to the parasite.
