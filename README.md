@@ -20,4 +20,6 @@ Filtering Steps:\
 The user can establish their own cut-off for abundance and proceed to analyse the top candidates further, e.g. by BLAST to check specificity to the parasite.
 
 PLEASE NOTE:
-The clustering.py and main.nf files are part of future development and are not suitable for use at this time.
+The tutorial ipython notebook, clustering.py and main.nf files are all part of future development and are not suitable for use at this time.
+
+fastasplitter.py is an optional script if you need to chop up any of the fasta files into smaller files to perform BLAST or any other file size-limited task.
