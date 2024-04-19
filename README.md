@@ -18,3 +18,6 @@ Filtering Steps:\
 3 - Rank the remaining sequences by average abundance across the samples\
 
 The user can establish their own cut-off for abundance and proceed to analyse the top candidates further, e.g. by BLAST to check specificity to the parasite.
+
+PLEASE NOTE:
+The clustering.py and main.nf files are part of future development and are not suitable for use at this time.
